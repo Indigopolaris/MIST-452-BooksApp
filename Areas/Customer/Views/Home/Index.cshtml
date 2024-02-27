@@ -1,0 +1,34 @@
+﻿@model List<Book> 
+
+<div class="row">
+    @foreach(var eachBook in Model)
+    {
+        <div class="col-3 mb-5">
+            <div class="col-12 m-2 p-2 border-2 shadow border-rounded text-center" style="min-height:100%">
+
+                <img class="card-img-top" src="@eachBook.ImgUrl"/>
+
+                <h3 class="card-title text-center text-uppercase"> @eachBook.BookTitle </h3>
+                <div class="card-body">
+
+                    <p class="card-text text-center">
+                        @eachBook.Author
+                        <br />
+                        @eachBook.Description
+                        <br />
+
+                        <p>
+                            @eachBook.category.Name
+                        </p>
+
+                        @eachBook.Price
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+    }
+
+</div>

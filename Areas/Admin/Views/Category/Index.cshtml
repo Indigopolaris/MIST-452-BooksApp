@@ -1,0 +1,40 @@
+﻿@model List<Category>
+
+<h1> Category List </h1>
+
+
+    <div class="pt-2 pb-2">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Category Name</th>
+                    <th>Category Description</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var eachCategory in Model)
+                {
+                    <tr>
+                        <td>@eachCategory.Name</td>
+                        <td>@eachCategory.Description</td>
+                        <td>
+                            <a asp-controller="Category" asp-action="Edit" asp-route-id="@eachCategory.CategoryId">Edit </a> | 
+                            <a asp-controller ="Category" asp-action="Delete" asp-route-id="@eachCategory.CategoryId">Delete</a> |
+
+                            <a asp-controller="Category" asp-action="Details" asp-route-id="@eachCategory.CategoryId">Details</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div>
+        <div class="col-6">
+
+        </div>
+        <div class="col-6">
+            <a asp-controller="Category" asp-action="Create" class="btn btn-primary">Create New Category</a>
+        </div>
+    </div>
