@@ -72,5 +72,26 @@ namespace books452.Areas.Admin.Controllers
             }
             return View(bookWithCategoriesVMobj);
         }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            Book book = _dbContext.Books.Find(id);
+
+            IEnumerable<SelectListItem> listOfCategories = _dbContext.Categories.ToList().Select(o => new SelectListItem
+            {
+                Text = o.Name,
+                Value = o.CategoryId.ToString()
+            });
+
+            BookWithCategoriesVM bookWithCategoriesVM = new BookWithCategoriesVM();
+
+            bookWithCategoriesVM.Book = book;
+
+            bookWithCategoriesVM.ListOfCategories = listOfCategories;
+
+            return View(bookWithCategoriesVM);
+
+        }
     }
 }
