@@ -93,5 +93,36 @@ namespace books452.Areas.Admin.Controllers
             return View(bookWithCategoriesVM);
 
         }
+
+        [HttpPost]
+        public IActionResult Edit(BookWithCategoriesVM bookWithCategoriesVM, IFormFile? imgFile) 
+        { 
+            string wwwrootPath = _environment.WebRootPath;
+            if(ModelState.IsValid) 
+            {
+                if(imgFile != null) //new img file check
+                {
+                    if(!string.IsNullOrEmpty(bookWithCategoriesVM.Book.ImgUrl))// existing img file check, if yes: delete
+                    {
+                       var oldImgPath = Path.Combine(wwwrootPath, bookWithCategoriesVM.Book.ImgUrl.TrimStart('\\'));
+
+                       if(System.IO.File.Exists(oldImgPath))
+                       {
+                            System.IO.File.Delete(oldImgPath);
+                       }
+                    }
+                    using (var fileStream = new FileStream(Path.Combine(wwwrootPath, @"Images\bookImages\" + imgFile.FileName), FileMode.Create))                        
+                    {
+                        imgFile.CopyTo(fileStream);//saves the file into the specified folder
+                    }
+
+                    bookWithCategoriesVM.Book.ImgUrl = @"\images\bookImages\" + imgFile.FileName;   
+                }
+                _dbContext.Books.Update(bookWithCategoriesVM.Book);
+                _dbContext.SaveChanges();
+                return RedirectToAction("Index");               
+            }           
+            return View(bookWithCategoriesVM);// only end up here if edit POST did not work
+        }
     }
 }

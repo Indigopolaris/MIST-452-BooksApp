@@ -1,0 +1,65 @@
+﻿@model BookWithCategoriesVM
+
+<h1>Edit Book</h1>
+
+<div class="border col-md-10">
+    <form asp-action="Edit" enctype="multipart/form-data">
+
+        <input asp-for="Book.BookId" hidden/>
+        <input asp-for="Book.ImgUrl" hidden />
+
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group m-4">
+            <label asp-for="Book.BookTitle" class="control-label"></label>
+            <input asp-for="Book.BookTitle" class="form-control" />
+            <span asp-validation-for="Book.BookTitle" class="text-danger"></span>
+        </div>
+
+        <div class="form-group m-4">
+            <label asp-for="Book.Author" class="control-label"></label>
+            <input asp-for="Book.Author" class="form-control" />
+            <span asp-validation-for="Book.Author" class="text-danger"></span>
+        </div>
+
+        <div class="form-group m-4">
+            <label asp-for="Book.Description" class="control-label"></label>
+            <input asp-for="Book.Description" class="form-control" />
+            <span asp-validation-for="Book.Description" class="text-danger"></span>
+        </div>
+
+        <div class="form-group m-4">
+            <label asp-for="Book.Price" class="control-label"></label>
+            <input asp-for="Book.Price" class="form-control" />
+            <span asp-validation-for="Book.Price" class="text-danger"></span>
+        </div>
+
+        <div class="form-group m-4">
+            <label asp-for="Book.CategoryId" class="control-label"></label>
+            <select asp-for="Book.CategoryId" class="form-control" asp-items="@Model.ListOfCategories">
+                <option disabled selected>Select a category</option>
+            </select>
+
+            <span asp-validation-for="Book.CategoryId" class="text-danger"></span>
+        </div>
+
+        <div class="form-group m-4">
+            <label asp-for="Book.ImgUrl" class="control-label"></label>
+            <input type="file" name="imgFile" class="form-control" />
+
+        </div>
+
+        <div class="form-group m-4">
+
+            <input type="submit" value="Edit Book" class="form-control btn btn-primary" />
+        </div>
+
+    </form>
+
+    @SectionWriters Scripts {
+
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+    }
+
+</div>
