@@ -20,6 +20,7 @@ public class Program
         builder.Services.AddDbContext<BooksDBContext>(options => options.UseSqlServer(connString));
         
         builder.Services.AddIdentity<IdentityUser,IdentityRole>().AddEntityFrameworkStores<BooksDBContext>().AddDefaultTokenProviders();
+
         builder.Services.ConfigureApplicationCookie(options => 
         { options.LoginPath = "/Identity/Account/Login";
             options.LogoutPath = "/Identity/Account/Logout";

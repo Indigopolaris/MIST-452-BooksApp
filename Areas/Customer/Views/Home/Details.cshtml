@@ -1,1 +1,45 @@
-﻿@Model 
+﻿@model Cart
+
+<form method="post">
+
+    <input asp-for="BookId" hidden/>
+    <div class="row m-5 border-2 shadow border-rounded">
+        <div class="card text-center">
+            <div class="row m-3">
+                <div class=" col-12 bg-primary rounded py-2 mb-3">
+                    <p class="card-title h1 text-white text-bg-danger text-opacity-75 ">
+                        @Model.Book.BookTitle
+                    </p>
+                </div>
+
+                <div class="col-6">
+                    <img src="@Model.Book.ImgUrl" class="card-img-top rounded p-4" />
+                </div>
+
+                <div class="col-6">
+                    <p class="card-text text-warning h3">
+                        by @Model.Book.Author
+                    </p>
+
+                    <p class="card-text text-start">
+                        @Model.Book.Description
+                    </p>
+
+                    <p class="card-text">
+                        @Model.Book.Price
+                    </p>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Quantity</span>
+
+                        <input asp-for="Quantity" class=" form-control"/>
+                    </div>
+
+                    <input type="submit" value="Add to Cart" class="btn btn-outline-warning"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+</form>
