@@ -20,5 +20,8 @@ namespace books452.Models
         public ApplicationUser ApplicationUser { get; set; }//nav prop
 
         public int Quantity { get; set; }
+
+        [NotMapped]
+        public decimal SubTotal { get; set; }
     }
 }

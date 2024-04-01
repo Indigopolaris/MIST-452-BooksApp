@@ -52,6 +52,18 @@ namespace books452.Areas.Customer.Controllers
 
             cart.UserId = userId;
 
+            Cart existingCart = _dbContext.Carts.FirstOrDefault(c => c.UserId == userId && c.BookId == cart.BookId);
+
+            if(existingCart != null) //cart exists already
+            { // update cart
+                existingCart.Quantity += cart.Quantity;
+                _dbContext.Carts.Update(existingCart);  
+            }
+            else
+            { //add new item in carts table
+                _dbContext.Carts.Add(cart);
+            }
+
             _dbContext.Carts.Add(cart);
             _dbContext.SaveChanges();
 
