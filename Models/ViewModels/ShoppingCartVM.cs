@@ -5,7 +5,7 @@
 
         public IEnumerable<Cart> CartItems { get; set; }
 
-        public decimal OrderTotal { get; set; }
+        public Order Order { get; set; }
 
     }
 }
