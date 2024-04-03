@@ -14,7 +14,7 @@ namespace books452.Models
         [ValidateNever]
         public ApplicationUser ApplicationUser { get; set; }
 
-        public DateOnly OrderDate { get; set; }
+        
 
         public string CustomerName { get; set; }
 
@@ -27,6 +27,11 @@ namespace books452.Models
         public string? Phone { get; set; }
 
         public decimal OrderTotal { get; set; }
-        
+
+        public string OrderStatus { get; set; }
+
+        public string PaymentStatus { get; set; }
+        public DateOnly OrderDate { get; set; }
+
     }
 }

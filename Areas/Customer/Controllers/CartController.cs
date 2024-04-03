@@ -77,5 +77,19 @@ namespace books452.Areas.Customer.Controllers
 
             return RedirectToAction("Index");
         }
+
+        //[HttpGet]  // 4/2 class
+        //public IActionResult ReviewOrder()
+        //{
+        //    var userId= User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        //}
+
+        //[HttpPost]
+        //[ActionName("ReviewOrder")]
+        //public IActionResult ReviewOrderPOST()
+        //{
+
+        //}
     }
 }
