@@ -56,7 +56,11 @@
             </div>
 
             <div class="col-12 text-end">
-                Order Total: @Model.OrderTotal.ToString("c")
+                Order Total: @Model.Order.OrderTotal.ToString("c")
+            </div>
+
+            <div>
+                <a asp-action="ReviewOrder" class="btn btn-primary">Review Order</a>
             </div>
         </div>
     </div>

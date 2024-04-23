@@ -26,14 +26,14 @@ namespace books452.Areas.Customer.Controllers
             ShoppingCartVM shoppingCartVM = new ShoppingCartVM
             {
                 CartItems = cartItemsList,
-                OrderTotal = 0
+                Order = new Order()
             };
 
             foreach(var cartItem in shoppingCartVM.CartItems)
             {
                 cartItem.SubTotal = cartItem.Book.Price * cartItem.Quantity;// subtotal for each item in cart
 
-                shoppingCartVM.OrderTotal += cartItem.SubTotal;
+                shoppingCartVM.Order.OrderTotal += cartItem.SubTotal;
             }
             return View(shoppingCartVM);
         }
@@ -78,12 +78,35 @@ namespace books452.Areas.Customer.Controllers
             return RedirectToAction("Index");
         }
 
-        //[HttpGet]  // 4/2 class
-        //public IActionResult ReviewOrder()
-        //{
-        //    var userId= User.FindFirstValue(ClaimTypes.NameIdentifier);
+        [HttpGet]  
+        public IActionResult ReviewOrder()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); //fetches user id
+            var cartItemsList = _dbContext.Carts.Where(c => c.UserId == userId).Include(c => c.Book); //query the cart by user id, include books in cart
 
-        //}
+            ShoppingCartVM shoppingCartVM = new ShoppingCartVM
+            {
+                CartItems = cartItemsList,
+                Order = new Order()
+            };
+
+            foreach (var cartItem in shoppingCartVM.CartItems)
+            {
+                cartItem.SubTotal = cartItem.Book.Price * cartItem.Quantity;// subtotal for each item in cart
+
+                shoppingCartVM.Order.OrderTotal += cartItem.SubTotal;
+            }
+
+            shoppingCartVM.Order.ApplicationUser = _dbContext.ApplicationUsers.Find(userId);
+            shoppingCartVM.Order.CustomerName = shoppingCartVM.Order.ApplicationUser.Name;
+            shoppingCartVM.Order.StreetAddress = shoppingCartVM.Order.ApplicationUser.StreetAddress;
+            shoppingCartVM.Order.City = shoppingCartVM.Order.ApplicationUser.City;
+            shoppingCartVM.Order.State = shoppingCartVM.Order.ApplicationUser.State;
+            shoppingCartVM.Order.PostalCode = shoppingCartVM.Order.ApplicationUser.PostalCode;
+            shoppingCartVM.Order.Phone = shoppingCartVM.Order.ApplicationUser.PhoneNumber;
+
+            return View(shoppingCartVM);
+        }
 
         //[HttpPost]
         //[ActionName("ReviewOrder")]
