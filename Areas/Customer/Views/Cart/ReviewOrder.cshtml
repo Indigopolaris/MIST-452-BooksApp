@@ -73,11 +73,16 @@
                     </div>
                 }
 
-                <div class="col-12 text-end">
+                <div class="card-footer bg-black text-white col-12 text-end">
                     Order Total: @Model.Order.OrderTotal.ToString("c")
                 </div>
 
             </div>
-        </div>
+            <div>
+                <div class="text-end">
+                    <button type="submit" class="btn btn-primary">Place Order</button>
+                </div>
+            </div>
+        </div>        
     </div>
 </form>
