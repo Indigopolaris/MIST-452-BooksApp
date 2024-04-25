@@ -9,6 +9,9 @@
             </div>
 
             <div class="col-6">
+                <div class="text-start fw-bold">
+                    Shipping Information
+                </div>
                 <div class="form-floating mb-1">
                     <input asp-for="Order.CustomerName" class="form-control" aria-required="true" placeholder="password" />
                     <label asp-for="Order.CustomerName">Customer Name</label>
@@ -49,6 +52,11 @@
             </div>
 
             <div class="col-6 border rounded">
+
+                <div class="text-start fw-bold">
+                    Order Details:
+                </div>
+
                 @foreach (var item in Model.CartItems)
                 {
                     <div class="row">
@@ -78,7 +86,7 @@
                 </div>
 
             </div>
-            <div>
+            <div class="card-footer">
                 <div class="text-end">
                     <button type="submit" class="btn btn-primary">Place Order</button>
                 </div>

@@ -1,0 +1,62 @@
+﻿@model List<ApplicationUser>
+
+
+    <h1>User List</h1>
+   
+        <Table class="table table-bordered table-striped">
+           
+            <thead>
+                <tr>
+                    <th>User Name</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>Role</th>
+                    <th>Lockout End Date</th>
+
+                    <th>   </th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach(var eachUser in Model)
+            {
+                <tr>
+                    <td>
+                        <a asp-action="EditUserRole" as-route-id="@eachUser.Id">@eachUser.Name</a> 
+                    </td>
+                    <td>@eachUser.Email</td>
+                    <td>@eachUser.PhoneNumber</td>
+                    <td>@eachUser.RoleName</td>
+
+                    @if(eachUser.LockoutEnd != null && eachUser.LockoutEnd > DateTime.Now)
+                    {
+                        <td>Locked until @eachUser.LockoutEnd.Value.Date.ToShortDateString</td>
+                    }
+                    else
+                    {
+                        <td>Account is unlocked. </td>
+                    }
+                    <td width="200px class=text-center">
+                    @if(eachUser.LockoutEnd > DateTime.Now)
+                         {
+                             <a class="btn btn-primary" asp-controller="User" asp-action="LockUnlock" asp-route-id="@eachUser.Id"><small>Unlock Account</small></a>
+                         }
+                    else
+                    {
+                        <a class="btn btn-danger" asp-controller="User" asp-action="LockUnlock" asp-route-id="@eachUser.Id"><small>Lock Account</small></a>
+
+                    }                    
+                @if(eachUser.LockoutEnd > DateTime.Now)
+                {
+                    <a class="btn btn-primary" asp-controller="User" asp-action="LockUnlock" asp-route-id="@eachUser.Id"><small>Unlock Account</small></a>
+                }
+
+                else
+                {
+                   <a class="btn btn-danger" asp-controller="User" asp-action="LockUnlock" asp-route-id="@eachUser.Id"><small>Lock Account</small></a>
+
+                }
+                </td>
+                </tr>
+            }
+            </tbody>
+            </table>

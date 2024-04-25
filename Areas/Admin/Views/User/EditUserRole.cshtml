@@ -1,0 +1,34 @@
+﻿@model Microsoft.AspNetCore.Identity.IdentityUserRole<string>
+
+@*edit page for user roles
+*@
+
+
+
+<h1>Edit User Role</h1>
+
+<div class="border col-md-10">
+
+    <form asp-action="EditUserRole">
+
+        <input asp-for="UserId" hidden />
+
+        <div class="form-group m-4">
+            <label class="control-label">User Email</label>
+            <input value="@ViewBag.UserInfo.Email" class="form-control" />
+        </div>
+
+        <div class="form-group m-4">
+            <label class="control-label">Role</label>
+            <select class="form-control" asp-items="@ViewBag.ListOfRoles" asp-items-selected="Id">
+                <option disabled selected>Select a category</option>
+            </select>
+            <input value="@ViewBag.UserInfo.Email" class="form-control" />
+        </div>
+
+        @* submit button *@
+        <div class="form-group m-4">
+            <input type="Submit" value="Save Changes" class="form-control btn btn-primary" />
+        </div>
+
+    </form>

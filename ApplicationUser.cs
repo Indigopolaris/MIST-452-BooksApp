@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace books452
 {
@@ -14,6 +15,7 @@ namespace books452
         public string? State { get; set; }
         public string? PostalCode { get; set; }
 
-        
+        [NotMapped] //not saved in the db
+        public string? RoleName { get; set; }
     }
 }

@@ -18,7 +18,9 @@ public class Program
 
         // add context class to set of services, define option to use sql server on the fetched connection string 
         builder.Services.AddDbContext<BooksDBContext>(options => options.UseSqlServer(connString));
-        
+
+        builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
+
         builder.Services.AddIdentity<IdentityUser,IdentityRole>().AddEntityFrameworkStores<BooksDBContext>().AddDefaultTokenProviders();
 
         builder.Services.ConfigureApplicationCookie(options => 

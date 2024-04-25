@@ -8,7 +8,9 @@ namespace books452.Models
         public int OrderDetailId { get; set; }
 
         public int OrderId { get; set; }
-
+        [ForeignKey("OrderId")]
+        [ValidateNever]
+        public Order Order { get; set; }
         public int BookId { get; set; }
 
         [ValidateNever]
