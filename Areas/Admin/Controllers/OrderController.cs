@@ -8,6 +8,7 @@ namespace books452.Areas.Admin.Controllers
 {
     public class OrderController : Controller
     {
+        public OrderVM orderVM { get; set; }
         private BooksDBContext _dbContext;
 
         public OrderController(BooksDBContext dbContext)
@@ -40,13 +41,13 @@ namespace books452.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult UpdateOrderInformation()
         {
-            Order orderFromDB = _dbContext.Orders.Find(OrderVM.Order.OrderID);
-            orderFromDB.CustomerName = OrderVM.Order.CustomerName;
-            orderFromDB.StreetAddress = OrderVM.Order.StreetAddress;
-            orderFromDB.City = OrderVM.Order.City;
-            orderFromDB.State = OrderVM.Order.State;
-            orderFromDB.PostalCode = OrderVM.Order.PostalCode;
-            orderFromDB.Phone = OrderVM.Order.Phone;
+            Order orderFromDB = _dbContext.Orders.Find(orderVM.Order.OrderID);
+            orderFromDB.CustomerName = orderVM.Order.CustomerName;
+            orderFromDB.StreetAddress = orderVM.Order.StreetAddress;
+            orderFromDB.City = orderVM.Order.City;
+            orderFromDB.State = orderVM.Order.State;
+            orderFromDB.PostalCode = orderVM.Order.PostalCode;
+            orderFromDB.Phone = orderVM.Order.Phone;
 
             //if(!string.IsNullOrEmpty(orderVM.Order.ShippingDate.ToString()))
             //{
@@ -76,7 +77,7 @@ namespace books452.Areas.Admin.Controllers
 
         public IActionResult ProcessOrder()
         {
-            Order order = _dbContext.Orders.Find(OrderVM.Order.OrderID); 
+            Order order = _dbContext.Orders.Find(orderVM.Order.OrderID); 
 
             order.OrderStatus = "Processing";
 
@@ -95,7 +96,7 @@ namespace books452.Areas.Admin.Controllers
 
         public IActionResult CompleteOrder()
         {
-            Order order = _dbContext.Orders.Find(OrderVM.Order.OrderID);
+            Order order = _dbContext.Orders.Find(orderVM.Order.OrderID);
 
             order.OrderStatus = "Shipped and Completed";
 

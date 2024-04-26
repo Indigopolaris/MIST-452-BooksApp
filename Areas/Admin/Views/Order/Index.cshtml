@@ -1,4 +1,4 @@
-﻿﻿@model IEnumerable<Order>
+﻿@model IEnumerable<Order>
 
 <div class="card shadow border-1 my-4">
 
@@ -30,13 +30,13 @@
                 {
                     <tr>
 
-                        <td>@eachOrder.OrderId</td>
+                        <td>@eachOrder.OrderID</td>
                         <td>@eachOrder.OrderDate</td>
                         <td>@eachOrder.CustomerName</td>
                         <td>@eachOrder.OrderTotal</td>
                         <td>@eachOrder.OrderStatus</td>
                         <td>@eachOrder.Phone</td>
-                        <td>@eachOrder.ApplicationUser.Email</td>
+                        <td>@eachOrder.ApplicationsUser.Email</td>
                         <td>
                             <a asp-controller="Order" asp-action="Details" asp-route-id="@eachOrder.OrderID">Details</a>
                         </td>
