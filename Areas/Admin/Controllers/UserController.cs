@@ -1,4 +1,5 @@
 ﻿using books452.Data;
+using books452.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -58,7 +59,7 @@ namespace books452.Areas.Admin.Controllers
             }
             _dbContext.SaveChanges();
 
-            return RedirectToAction("Idex");
+            return RedirectToAction("Index");
 
         }
 

@@ -19,15 +19,35 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
+                        @if (User.IsInRole("Customer") || (!User.Identity.IsAuthenticated))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="Customer" asp-controller="Cart" asp-action="Index">Cart</a>
+                            </li>
+                        }
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-light" asp-area="Admin" asp-controller="Book" asp-action="Index">Books</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="Admin" asp-controller="Category" asp-action="Index">Categories</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="Customer" asp-controller="Cart" asp-action="Index">Cart</a>
-                        </li>
+
+                        @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="Admin" asp-controller="Category" asp-action="Index">Categories</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="Admin" asp-controller="Order" asp-action="Index">Manage Orders</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="Admin" asp-controller="User" asp-action="Index">Manage Users</a>
+                            </li>
+                        }
+
+                            
+                        
                     </ul>
 
                     <partial name="_LoginPartial" />

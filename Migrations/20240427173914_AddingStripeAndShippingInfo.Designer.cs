@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using books452.Data;
 
@@ -11,9 +12,11 @@ using books452.Data;
 namespace books452.Migrations
 {
     [DbContext(typeof(BooksDBContext))]
-    partial class BooksDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240427173914_AddingStripeAndShippingInfo")]
+    partial class AddingStripeAndShippingInfo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -466,7 +469,7 @@ namespace books452.Migrations
                     b.ToTable("OrderDetails");
                 });
 
-            modelBuilder.Entity("books452.Models.ApplicationUser", b =>
+            modelBuilder.Entity("books452.ApplicationUser", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
@@ -559,7 +562,7 @@ namespace books452.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("books452.Models.ApplicationUser", "ApplicationUser")
+                    b.HasOne("books452.ApplicationUser", "ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -572,7 +575,7 @@ namespace books452.Migrations
 
             modelBuilder.Entity("books452.Models.Order", b =>
                 {
-                    b.HasOne("books452.Models.ApplicationUser", "ApplicationsUser")
+                    b.HasOne("books452.ApplicationUser", "ApplicationsUser")
                         .WithMany()
                         .HasForeignKey("ApplicationUserID")
                         .OnDelete(DeleteBehavior.Cascade)

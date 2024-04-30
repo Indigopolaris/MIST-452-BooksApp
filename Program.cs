@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using books452;
+using Stripe;
 
 public class Program
 {
@@ -49,11 +50,14 @@ public class Program
 
         app.UseRouting();
 
+        
 
         app.UseAuthentication();
         app.UseAuthorization();
 
         app.MapRazorPages();
+        StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe:SecretKey").Get<string>();
+
         app.MapControllerRoute(
             name: "default",
             pattern: "{Area=Customer}/{controller=Home}/{action=Index}/{id?}");

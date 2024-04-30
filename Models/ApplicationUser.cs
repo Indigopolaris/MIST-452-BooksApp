@@ -2,9 +2,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace books452
+namespace books452.Models
 {
-    public class ApplicationUser : IdentityUser 
+    public class ApplicationUser : IdentityUser
     {
         [Required]
         public string Name { get; set; }
